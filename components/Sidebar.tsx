@@ -22,7 +22,7 @@ function Sidebar() {
     await supabase.auth.signOut();
 
     toast("Logged out successfully", {
-      icon: "🥲",
+      icon: "🦊",
     });
   }
 
