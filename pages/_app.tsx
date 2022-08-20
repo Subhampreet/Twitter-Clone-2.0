@@ -2,9 +2,10 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { supabase } from "../utils/supabase";
+import {supabase} from "../utils/supabase";
 import { AuthChangeEvent, Session } from "@supabase/supabase-js";
 import LoadingPage from "../components/LoadingPage";
+import { RecoilRoot } from "recoil";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [authenticated, setAuthenticated] = useState<String>();
@@ -60,12 +61,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   if (loading) return <LoadingPage />;
 
-
   return (
-    <>
-        <Toaster />
-        <Component {...pageProps} />
-    </>
+    <RecoilRoot>
+      <Toaster />
+      <Component {...pageProps} />
+    </RecoilRoot>
   );
 }
 
