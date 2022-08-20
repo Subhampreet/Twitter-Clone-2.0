@@ -10,9 +10,44 @@ import {
   } from "@heroicons/react/outline";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import { supabase } from '../utils/supabase';
 
 
 function Sidebar() {
+
+  const user = supabase.auth.user();
+
+  // handleLogout using supabase
+  async function handleLogout() {
+    await supabase.auth.signOut();
+
+    toast("Logged out successfully", {
+      icon: "🥲",
+    });
+  }
+
+  // handle login using supabase with github
+  async function handleLogin() {
+    const notification = toast.loading("Signing in...");
+
+    const { user, error } = await supabase.auth.signIn({
+      provider: "github",
+    });
+
+    if (user) {
+      toast("Signed In", {
+        id: notification,
+        icon: "🥳",
+      });
+    } else if (error) {
+      toast.error(error.message, {
+        id: notification,
+      });
+    }
+  }
+
+
+
   return (
     <div className="flex flex-col col-span-2 items-center px-4 md:items-start">
       <div className="m-5 p-4 rounded-full cursor-pointer hover:bg-sky-100 duration-100 grid items-center">
@@ -34,7 +69,8 @@ function Sidebar() {
       <SidebarRow Icon={BookmarkIcon} title="Bookmarks" />
       <SidebarRow
         Icon={UserIcon}
-        title="Sign In"        
+        title={user ? "Sign Out" : "Sign In"}  
+        onClick={user ? handleLogout : handleLogin}      
       />
       <SidebarRow Icon={DotsCircleHorizontalIcon} title="More" />
 
