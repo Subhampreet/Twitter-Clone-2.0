@@ -48,7 +48,7 @@ function TweetBox({ tweetId }: Props) {
           {tweet.image_id?.url && (
             <div className="mt-2">
               <Image
-                src={`https://udtndleajmnrvcztmlur.supabase.co/storage/v1/object/public/images/${tweet.image_id.url}`}
+                src={`https://jenvrvhinapkvugitnmo.supabase.co/storage/v1/object/public/images/${tweet.image_id.url}`}
                 className="m-5 ml-0 mb-1 max-w-full rounded-lg object-cover shadow-lg w-full"
                 layout="responsive"
                 width = {tweet.image_id.width}

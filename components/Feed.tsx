@@ -48,7 +48,7 @@ function Feed() {
       <PostBox />
 
       {/* Tweets */}
-      <div className="max-h-[85vh] overflow-scroll scrollbar-hide">
+      <div className="max-h-[85vh] overflow-hidden scrollbar-hide">
         {tweets?.map((tweet) => (
           <TweetBox key={tweet.id} tweetId={tweet.id} />
         ))}
